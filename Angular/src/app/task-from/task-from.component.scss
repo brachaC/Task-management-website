@@ -1,0 +1,69 @@
+
+:host{
+   .task-form {
+    direction: rtl;
+    max-width: 500px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 150, 255, 0.2);
+    border:solid 8px rgb(5, 40, 80);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: "Segoe UI", sans-serif;
+    animation: floatIn 0.8s ease-out;
+  }
+
+  .form-title {
+    text-align: center;
+    color: #0077b6;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  label, mat-label {
+    font-family: "Segoe UI", sans-serif;
+    color: #004c70;
+    font-weight: 500;
+    font-size: 15px; 
+  }
+
+  input, textarea, select {
+
+    width: 80%;
+    margin-top: 6px;
+    padding: 10px 12px;
+    border: 2px solid #b3e0ff;
+    border-radius: 8px;
+    background: #f9fcff;
+    color: #00334e;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    &.ng-invalid{
+      border: 2px solid #e74c3c; /* אדום חזק */
+      background-color: #fdecea; /* רקע בהיר אדמדם */
+    }
+    
+  }
+.empty{ 
+  width: 20px !important;
+}
+  input:focus, textarea:focus, select:focus {
+    border-color:rgb(25, 194, 194);
+    box-shadow: 0 0 8px rgb(25, 194, 194);
+    background: #ffffff;
+  }
+
+  textarea {
+    resize: none;
+    min-height: 80px;
+  }
+  .buttons{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+}

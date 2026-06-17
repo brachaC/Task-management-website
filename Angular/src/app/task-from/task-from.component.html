@@ -1,0 +1,31 @@
+<form [formGroup]="taskForm" class="task-form">
+    <label>name
+     <span class="empty"></span>
+     <input formControlName="name" placeholder="enter name for task"/>
+    </label>
+    <label>
+        description
+        <textarea formControlName="description"
+     placeholder="enter description for text" ></textarea>
+    </label>
+    <label>price
+        <input type ="number"
+                formControlName="price"
+                placeholder="enter price for text"/>
+    </label>
+    <mat-form-field appearance="fill" dir="rtl">
+     <mat-label>choose goal's date</mat-label>
+     <input matInput [matDatepicker]="picker"  formControlName="scheduling">
+     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>   
+
+    </mat-form-field>
+<app-status  formControlName="status" 
+            [canChangeStatus]="!isNew"></app-status>
+<div class="buttons">
+    <button [disabled]="taskForm.invalid" (click)="save()" >save</button>
+    
+    
+    <button  (click)="cancel()">cancel</button>
+  </div>
+</form>

@@ -1,0 +1,10 @@
+<div class="divtask" appoverhilight>
+<div class ="task" [innerText] ="task.name"></div>
+<div class ="task" [innerText] ="task.id"></div> 
+<div class ="task" [innerText] ="task.description"></div> 
+<div class ="task" [innerText] ="task.scheduling"></div> 
+<div class ="task" [innerText] ="task.price | currency:'ILS':'symbol':'1.0-2'"></div>
+<div class ="task" [innerText] ="task.status |status"></div>
+
+<mat-icon>{{task.status | icons}}</mat-icon>   
+</div>

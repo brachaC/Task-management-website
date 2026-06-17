@@ -1,0 +1,46 @@
+
+<div class="home-page">
+  <section class="hero">
+    <div class="hero-text">
+      <p class="greeting">שלום, אני <strong>{{ name }}</strong></p>
+      <h1>הנדסאית תוכנה</h1>
+      <p class="subtitle">מומחיות ב‑Angular, React, SQL, Python, Node.js, C#, C++ ,C ,ו‑Java. בונה חוויות חכמות, מהירות ויזואלית.</p>
+
+      <div class="status-row">
+        <div class="status-chip" [ngClass]="{ active: isServerAlive === true, inactive: isServerAlive === false }">
+          <span *ngIf="isServerAlive === null">בודק מצב שרת...</span>
+          <span *ngIf="isServerAlive === true">✅ השרת פעיל</span>
+          <span *ngIf="isServerAlive === false">❌ השרת אינו פעיל</span>
+        </div>
+      </div>
+
+      <div class="hero-buttons">
+        <button class="primary" (click)="goToResume()">🗒️ קורות חיים</button>
+        <button class="primary" (click)="goTOlogin()">💻 לצפייה בפרויקט</button>
+        <button class="secondary" (click)="click()">📞 צור קשר</button>
+      </div>
+      <p class="contact-phone" *ngIf="phone">{{ phone }}</p>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <h2>השפות שלי</h2>
+      <ul>
+        <li>{{ s1 }}</li>
+        <li>{{ s2 }}</li>
+        <li>{{ s3 }}</li>
+        <li>{{ s4 }}</li>
+        <li>{{ s5 }}</li>
+        <li>{{ s6 }}</li>
+      </ul>
+    </div>
+
+    <div class="feature-card">
+      <h2>פרטים מהירים</h2>
+      <p>{{ information1 || '📄 לחץ על קורות חיים לבדיקת פרטים נוספים' }}</p>
+      <p>{{ information2 || '💻 לחץ על פרויקט להצגה' }}</p>
+      <p>{{ information3 || '📝 לחץ על הזמנת פרויקט לקבלת הצעת מחיר' }}</p>
+    </div>
+  </section>
+</div>

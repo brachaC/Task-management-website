@@ -1,0 +1,53 @@
+:host{
+    body{
+        direction: rtl;
+        background-color: rgb(46, 224, 224);
+    }
+   mat-header-cell {
+        background-color:  rgb(46, 224, 224);
+        color: rgb(238, 3, 81);
+         font-size: 1.2rem;
+        font-weight: bold; 
+        text-align: center;
+        letter-spacing: 0.5px;
+        padding: 16px;
+        text-transform: uppercase; 
+        border-bottom: 2px solid  rgb(25, 194, 194);
+    }
+    mat-cell {
+        padding: 14px;
+        font-size: 14px;
+        color:rgb(238, 26, 96);
+        border-bottom: 1px solid  rgb(25, 194, 194);
+    }
+ mat-row:hover {
+        background-color: rgba(11, 235, 235, 0.514);
+    }
+    mat-row, mat-header-row {
+        display: flex;
+        align-items: center;
+    }
+    mat-icon {
+        color:rgb(245, 8, 87);  
+    }
+    mat-header-cell, mat-cell {
+        flex: 1;
+        display: flex;
+        align-items: center;
+    }
+    
+//     th{
+//         color:rgb(245, 63, 123);
+//         font-family: inherit;
+//         background-color: aqua;
+//         border: 3px outset;
+//         width: 200px;
+//         height: 100px;
+//     }
+// td{
+//     color:rgb(245, 63, 123);
+//         font-family:initial;
+//         background-color: aqua;
+
+// }
+}

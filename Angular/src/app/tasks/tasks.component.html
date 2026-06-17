@@ -1,0 +1,21 @@
+
+<header>
+<button id="button" [innerText]="viewState===theStateEnum.Table?
+'table':'dashboard'" (click)="changeState()"></button>
+<button id="button" (click)="addTask()" [innerText]="'add task'"></button>    
+<select [(ngModel)]="selectStatus" id="select">
+    <option [value]="-1">{{-1 | status}}</option>
+    <option [value]="0">{{0 | status}}</option>
+    <option [value]="1">{{1 | status}}</option>
+    <option [value]="2">{{2| status}}</option>
+    <option [value]="3">{{3 | status}}</option>
+</select>
+
+</header>
+
+<div *ngIf ="viewState===theStateEnum.Dashboard">
+<app-tasks-dashboard [taskslist]="taskslist | filterStatus:selectStatus"></app-tasks-dashboard>
+</div>
+<div *ngIf ="viewState===theStateEnum.Table">
+<app-tasks-table [taskslist]="taskslist  | filterStatus:selectStatus"></app-tasks-table>
+</div>

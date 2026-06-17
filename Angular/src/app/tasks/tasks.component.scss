@@ -1,0 +1,160 @@
+:host{
+ select{
+   text-align: center;
+   color:rgb(238, 18, 92);
+   width: 400px;
+   background-color: rgb(25, 194, 194);
+   height: 50px;
+   font-size: 23px;
+   border: solid rgb(238, 18, 92) 6px;
+    border-radius: 12px;
+    font-family: Segoe UI Light;
+}  
+button{
+        text-align: center;
+        background-color: rgb(25, 194, 194) lighten($color: #000000, $amount: 0);
+        color: rgb(238, 18, 92);
+        font-family: Segoe UI Light;
+        border: 1px solid rgb(25, 194, 194);
+        width: 50%;
+        height: 7vw;
+        font-size:30px;
+        margin-right: 0px;    
+}
+
+        
+ }
+// @import '../../styles/styles.scss';
+ 
+//     .container {
+//         direction:rtl;
+//         align-items: center;
+//         width: 100%;
+//         height: 10%;
+       
+//     } 
+//     .flex{
+//         display: flex;
+//         flex-direction: row;
+//         .empty {
+//             flex: 1 1 auto;
+//         }
+//     }
+    
+//      .box {
+//         margin: 14px 18px;
+//         background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+//         border: 1px solid #bae6fd;
+//         border-radius: 10px;
+//         font-size: 14px;
+//         font-weight: 500;
+//         color: #0f172a; 
+//         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+//         transition: all 0.2s ease-in-out;
+//         display: inline-flex;
+//         align-items: center;
+//         gap: 8px;
+//         }
+
+//         .box::before {
+//         content: "ℹ️";
+//         font-size: 16px;
+//         }
+
+//         .box:hover {
+//             transform: translateY(-2px);
+//             background: linear-gradient(135deg, #bae6fd, #e0f2fe);
+//             box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+//         }
+  
+// .mat-mdc-form-field-flex { 
+//     background-color: $colorBlue; 
+//     border: none;
+//     width:190px;
+//     height:40px;
+//     text-align: center; 
+// }
+// .mat-mdc-form-field-flex{
+//      padding: 0;
+// }
+// //  .mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label {
+// //     color:white;
+// //     font-family:'Ariel';
+// //     font-size: 16px;
+// //  }
+// // .mat-mdc-text-field-wrapper {
+// //             background-color: $colorBlue; 
+// //         }
+// .status-select .mat-mdc-form-field-infix {
+//   padding: 0 !important;
+// }
+
+// .status-select .mat-mdc-select-trigger {
+//   padding: 0 !important;
+// }
+
+//     .status-select .mat-mdc-text-field-wrapper {
+//   background-color: $colorBlue;
+//   color: white;
+//   height: 40px;
+//   border-radius: 6px;
+//   transition: background-color 0.3s ease;
+// }
+
+// .status-select .mat-mdc-form-field-flex {
+//   height: 40px;
+//   align-items: center;
+// }
+
+// .status-select .mat-mdc-select-trigger {
+//   height: 40px;
+//   color: white;
+//   font-size: 16px;
+//   justify-content: center;
+//   text-align: center;
+// }
+
+// .status-select .mat-mdc-select-value {
+//   color: white;
+//   text-align: center;
+// }
+
+// .status-select .mat-mdc-select-arrow {
+//   color: white;
+// }
+
+// /* ביטול underline של fill */
+// .status-select .mdc-line-ripple {
+//   display: none;
+// }
+// .status-select .mat-mdc-form-field-infix,
+// .status-select .mat-mdc-select-trigger,
+// .status-select .mat-mdc-text-field-wrapper {
+//   padding: 0 !important;
+//   border-radius: none !important;
+// }
+
+// /* hover */
+// .status-select:hover .mat-mdc-text-field-wrapper {
+//   background-color: darken($colorBlue, 10%);
+// }
+
+
+// .custom-badge .mat-badge-content {
+//   background: linear-gradient(45deg, gray, #3f51b5);
+//   color: white;
+//   font-size: 14px; 
+//   border-radius: 50%; /* עיגול מושלם */
+//   width: 32px;
+//   height: 32px; 
+//   border : solid 2px red;
+//   transform: translateX(20px); 
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+ 
+    
+
+
+ 

@@ -1,0 +1,41 @@
+<div class="allDiv">    
+<h1 >Login</h1>
+<form [formGroup]="formGroup" (ngSubmit)="login()">
+<div id="labelInput">
+ <label for ="userName">UserName</label>
+ <input
+ type ="text" 
+ id="userName"
+ class=""
+ formControlName="userName"
+ required
+ placeholder="Enter your userName"
+ >
+ <span class="errorText"
+*ngIf="formGroup.get('username')?.invalid && mouseoverLogin"
+[innerText]="'Mandatory field'">
+                </span>
+</div>
+<div id="labelInput">
+<label for="password">Password</label>
+<input 
+    type="password" 
+    id="password" 
+    class="" 
+    formControlName="password" 
+    required
+    placeholder="Enter your password"/>
+
+<span class="errorText"
+*ngIf="formGroup.get('password')?.invalid && mouseoverLogin"
+[innerText]="'Mandatory field'">
+                </span>
+               </div>
+ <div
+(mouseenter)="mouseoverLogin=true"
+(mouseleave)="mouseoverLogin=false">
+<button type="submit" class="login" [disabled]="formGroup.invalid">Login</button>
+</div>         
+</form>
+
+</div>
