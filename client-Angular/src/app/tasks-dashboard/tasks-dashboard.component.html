@@ -1,0 +1,13 @@
+<div    class="rect">
+@for(onetask of tasksList;track onetask){
+
+<div>
+    <app-task [task]="onetask">
+@if(onetask.status=== theStatusEnum.completed){
+            <span end [innerText]="'😊'"></span>
+            }
+    </app-task>
+</div>
+}
+</div>
+

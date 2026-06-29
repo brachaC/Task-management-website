@@ -5,6 +5,7 @@ import { StatusPipe } from '../pipe/status.pipe';
 import { TaskComponent } from '../task/task.component';
 import { FilterStatusPipe } from '../pipe/filter-status.pipe';
 import { FormsModule } from '@angular/forms';
+import { StatusMode } from '../model/statusMode';
 
 @Component({
   selector: 'app-tasks-dashboard',
@@ -13,5 +14,6 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './tasks-dashboard.component.scss'
 })
 export class TasksDashboardComponent {
-@Input() taskslist:Itask[]=[];
+@Input() tasksList: Itask[] | null= [];
+theStatusEnum= StatusMode;
 }

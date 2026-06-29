@@ -25,5 +25,9 @@ import { IconsPipe } from '../pipe/icons.pipe';
 export class TaskComponent {
   @Input() task :Itask={}as Itask;
    theStatusEnum=StatusMode;
+
+   ngOnInit(): void {
+    const i=0
+  }
 }
 

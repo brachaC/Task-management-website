@@ -1,4 +1,4 @@
-<mat-table [dataSource]="taskslist" class="mat-elevation-z8">
+<mat-table [dataSource]="tasksList || []" class="mat-table custom-table">
     <ng-container *ngFor="let column of columns" [matColumnDef]="column">
         <mat-header-cell *matHeaderCellDef>
             <span [innerText]="column"></span>

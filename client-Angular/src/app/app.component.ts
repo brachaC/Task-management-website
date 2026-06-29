@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { CommonModule } from '@angular/common';
 import { TasksComponent } from './tasks/tasks.component';
-import { Itask } from './model/task';
 import { MainComponent } from './main/main.component';
 import { TaskComponent } from './task/task.component';
 import { LoginComponent } from './login/login.component';
@@ -31,7 +30,5 @@ import { ChatComponent } from './chat/chat.component';
   ]
 })
 export class AppComponent {
-  title = 'Brachy';
-  @Input ()taskslist:Itask[]=[]
 }
 

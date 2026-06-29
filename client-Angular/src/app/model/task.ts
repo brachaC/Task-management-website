@@ -1,10 +1,10 @@
 import {StatusMode } from "./statusMode";
 
 export interface Itask{
-    id:string,
+    taskId:number,
     name:string,
     description:string,
     price:number,
-    scheduling:string,
+    scheduling: string,
     status:StatusMode
 }
