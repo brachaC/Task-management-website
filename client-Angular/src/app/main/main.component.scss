@@ -1,136 +1,48 @@
 :host {
   display: block;
   direction: rtl;
-  font-family: Arial, sans-serif;
   min-height: 100vh;
-  background-color: #f0f0f0;
+  background: var(--bg, #f8fafc);
 
-  .row {
+  .navbar {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    background-color:  #155e6f;
+    justify-content: center;
+    background: var(--primary, #0d6b7d);
+    padding: 0.8rem 1rem;
+    box-shadow: 0 2px 12px rgba(13, 107, 125, 0.2);
+
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: var(--radius, 12px);
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: background 0.2s;
+
+      &.active {
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      &:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
   }
 
   .flex-col {
     display: flex;
     flex-direction: column;
-    min-width: 120px;
   }
 
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  /* ===== Navbar ===== */
-  .navbar {
-    z-index: 1000;
-    width: 90%;
-    margin: 0 auto;
-    overflow: hidden;
-    background-color:  #155e6f; /* רקע כהה יותר */
-
-    ul {
-      list-style-type: none;
-      display: flex;
-      padding: 0;
-      margin: 0;
-      justify-content: center;
-    }
-
-    li {
-      display: flex;
-      align-items: center;
-      font-size: 30px;
-      margin: 0 1rem;
-    }
-
-    a.active {
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      background-color:  #046d85; /* כפתור כהה */
-      border-radius: 6px;
-      transition: 0.2s ease-in-out;
-    }
-
-    a.active:hover {
-      background-color:  #046d85; /* כהה יותר בהובר */
-      font-weight: bold;
-    }
-
-    a.disabled {
-      color:  #155e6f99; /* טקסט כהה יותר */
-      pointer-events: none;
-      cursor: not-allowed;
-      background-color:  #155e6f;
-      text-decoration: none;
-    }
-  }
-
-  .logo {
-    padding-left: 5vh;
-    height: 10vh;
-    width: auto;
-  }
-
-  /* ===== Buttons ===== */
-  button {
-    background-color:  #155e6f; /* כפתורים כהים יותר */
-    color: white;
-    border: none;
-    margin: 10px;
-    padding: 4px 8px;
-    font-size: 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-
-    &:hover {
-      background-color:  #155e6f;
-    }
-
-    &[disabled] {
-      color:  #155e6f;
-      background-color:  #99e8fa;
-      border: solid 1px  #155e6f;
-      cursor: not-allowed;
-    }
-  }
-
-  /* ===== Server status ===== */
-  .server-status {
-    margin: 1rem 0;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-
-    span {
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font-weight: bold;
-      background-color: white;
-      box-shadow: 0 4px 10px  #155e6f;
-    }
-
-    .online {
-      color: green;
-    }
-
-    .offline {
-      color: red;
-    }
-
-    .checking {
-      color:  #155e6f55;
-    }
-  }
-
-  /* ===== Floating Chat Button ===== */
   app-chat {
     position: fixed;
     bottom: 20px;
@@ -138,7 +50,7 @@
     z-index: 2000;
     width: 350px;
     max-width: 90%;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   }
 }

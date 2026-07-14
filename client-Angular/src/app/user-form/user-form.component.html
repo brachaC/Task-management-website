@@ -1,35 +1,51 @@
-<form [formGroup]="userForm"  class="user-form">
-  <label> שם משתמש
-    <span  class="empty"></span>
-    <input type="text" formControlName="userName" placeholder="הכנס שם משתמש" />
-  </label>
+<form [formGroup]="userForm" class="user-form">
+  <div class="form-header">
+    <span class="form-icon">👤</span>
+    <h2>הוספת משתמש חדש</h2>
+    <p class="form-sub">מלא את פרטי המשתמש</p>
+  </div>
 
-  <label>
-    טלפון
-    <input type="text" formControlName="phone"
-     placeholder="הכנס מספר טלפון"/>
-  </label>
+  <div class="form-body">
+    <div class="field-group">
+      <label>שם משתמש</label>
+      <input formControlName="userName" placeholder="הכנס שם משתמש..." />
+      <span class="field-icon">👤</span>
+    </div>
 
-  <label>
-    אמייל
-    <input type="text" formControlName="email" placeholder="הכנס מייל" />
-  </label>
+    <div class="row-2">
+      <div class="field-group">
+        <label>טלפון</label>
+        <input formControlName="phone" placeholder="050-1234567" />
+        <span class="field-icon">📞</span>
+      </div>
+      <div class="field-group">
+        <label>אימייל</label>
+        <input formControlName="email" placeholder="user@example.com" />
+        <span class="field-icon">📧</span>
+      </div>
+    </div>
 
-    <label>
-    סיסמא
-    <input type="text" formControlName="password" placeholder="הכנס סיסמא" />
-  </label>
-
-   <label>בחר תפקיד:</label>
-
+    <div class="row-2">
+      <div class="field-group">
+        <label>סיסמה</label>
+        <input type="password" formControlName="password" placeholder="••••••••" />
+        <span class="field-icon">🔒</span>
+      </div>
+      <div class="field-group">
+        <label>תפקיד</label>
         <select formControlName="roleId">
-            <option [ngValue]="theRoleEnum.manager">מנהל</option>
-            <option [ngValue]="theRoleEnum.standard">משתמש רגיל</option>
+          <option [ngValue]="theRoleEnum.standard">👤 משתמש רגיל</option>
+          <option [ngValue]="theRoleEnum.manager">⭐ מנהל</option>
         </select>
-   <div class="buttons">
-    <button [disabled]="userForm.invalid" (click)="save()" 
-    [innerText]="'שמור'"></button>
-    
-    <button  (click)="cancel()">בטל</button>
+        <span class="field-icon">🛡️</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn-cancel" type="button" (click)="cancel()">❌ בטל</button>
+    <button class="btn-save" type="button" [disabled]="userForm.invalid" (click)="save()">
+      💾 שמור משתמש
+    </button>
   </div>
 </form>

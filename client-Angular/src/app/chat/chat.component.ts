@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, inject, OnInit, OnDestroy} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormField } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { ChatMessagePipe } from '../pipe/chat-message.pipe';
 import { RandomColorPipe } from '../pipe/random-color.pipe';
 import { MessageService } from '../services/http/message.service';
+import { ConfigurationService } from '../services/configuration.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -28,20 +30,46 @@ import { MessageService } from '../services/http/message.service';
     ChatMessagePipe
   ] 
 })
-export class ChatComponent implements OnInit , AfterViewInit{
- 
+export class ChatComponent implements OnInit , AfterViewInit, OnDestroy{
+
   num = 0;
   open = false;
   input = '';
   messages = [{ text: 'שלום! איך אפשר לעזור לך?', sender: '' }];
   private messagService = inject(MessageService);
+  private configService = inject(ConfigurationService);
+  private msgSub!: Subscription;
+  private importantSub!: Subscription;
+  private importantMessageDate = '';
 
   ngOnInit(): void {
-    this.num =    Math.random();
+    this.num = Math.random();
+    this.msgSub = this.configService.messageEvent.subscribe(data => {
+      try {
+        const msg = JSON.parse(data);
+        this.addMessage(msg.userName || msg.sender || '', msg.text || msg.message || data);
+      } catch {
+        this.addMessage('', data);
+      }
+    });
+    this.importantSub = this.configService.importantEvent.subscribe(data => {
+      try {
+        const msg = JSON.parse(data);
+        if (msg.date !== this.importantMessageDate) {
+          this.importantMessageDate = msg.date;
+        }
+        this.addMessage('מנהל המשימות', `💥משימה &&${msg.name}&& חייבת להסתיים היום!`);
+      } catch {}
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.msgSub?.unsubscribe();
+    this.importantSub?.unsubscribe();
   }
 
    ngAfterViewInit(): void {
-  
+
   }
 
   send() {

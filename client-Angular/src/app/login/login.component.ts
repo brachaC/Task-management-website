@@ -1,41 +1,58 @@
-import { Component, OnInit ,inject} from '@angular/core';
-import { ReactiveFormsModule, Validators } from '@angular/forms';
-import { ValidationErrors } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { FormGroup,FormBuilder,FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../services/http/auth.service.service';
+import { catchError, of, tap } from 'rxjs';
+import { SnackService } from '../services/snack.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule,CommonModule,
-    FormsModule,
-   ],
+  imports: [FormsModule, ReactiveFormsModule, MatIconModule, MatProgressSpinnerModule, RouterModule, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit{
-router = inject(Router);  
-mouseoverLogin:boolean=false
-formGroup:FormGroup={} as FormGroup
-constructor(private formBuilder:FormBuilder){} 
-ngOnInit(){
-    this.formGroup = this.formBuilder.group({
-        userName: ['', Validators.required],
-        password: ['', Validators.required]
-      });
-  }
- login(){
-  //const connect = this.formGroup.value
-  const{userName,password}=this.formGroup.value
-  //if(!localStorage.getItem(this.formGroup.value.userName))
-    //localStorage.setItem(this.formGroup.value.userName,
-      //JSON.stringify(this.formGroup.value.password))
-    localStorage.setItem('user', JSON.stringify
-    ({userName,password }));
-  
-   
-  this.router.navigate(['/main']);
- } 
- 
+export class LoginComponent implements OnInit {
+  snack = inject(SnackService);
+  router = inject(Router);
+  auth = inject(AuthService);
+  loading = false;
+  showNotFoundAlert = false;
 
+  formGroup!: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit() {
+    this.formGroup = this.formBuilder.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  login() {
+    if (this.formGroup.invalid) return;
+    this.loading = true;
+    this.showNotFoundAlert = false;
+    const { userName, password } = this.formGroup.value;
+    this.auth.login$({ userName, password }).pipe(
+      tap((res) => {
+        this.loading = false;
+        if (res?.token) {
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('userName', res.userName);
+          this.router.navigate(['/main']);
+        } else {
+          this.showNotFoundAlert = true;
+        }
+      }),
+      catchError(() => {
+        this.loading = false;
+        this.showNotFoundAlert = true;
+        return of(null);
+      })
+    ).subscribe();
+  }
 }

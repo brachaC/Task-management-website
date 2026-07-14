@@ -1,31 +1,58 @@
 <form [formGroup]="taskForm" class="task-form">
-    <label>name
-     <span class="empty"></span>
-     <input formControlName="name" placeholder="enter name for task"/>
-    </label>
-    <label>
-        description
-        <textarea formControlName="description"
-     placeholder="enter description for text" ></textarea>
-    </label>
-    <label>price
-        <input type ="number"
-                formControlName="price"
-                placeholder="enter price for text"/>
-    </label>
-    <mat-form-field appearance="fill" dir="rtl">
-     <mat-label>choose goal's date</mat-label>
-     <input matInput [matDatepicker]="picker"  formControlName="scheduling">
-     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>   
+  <div class="form-header">
+    <span class="form-icon">{{ isNew ? '➕' : '✏️' }}</span>
+    <h2>{{ isNew ? 'משימה חדשה' : 'עריכת משימה' }}</h2>
+    <p class="form-sub">מלא את הפרטים למטה</p>
+  </div>
 
-    </mat-form-field>
-<app-status  formControlName="status" 
-            [canChangeStatus]="!isNew"></app-status>
-<div class="buttons">
-    <button [disabled]="taskForm.invalid" (click)="save()" >save</button>
-    
-    
-    <button  (click)="cancel()">cancel</button>
+  <div class="form-body">
+    <div class="field-group">
+      <label>שם המשימה</label>
+      <input formControlName="name" placeholder="הקלד שם למשימה..." />
+      <span class="field-icon">📋</span>
+    </div>
+
+    <div class="field-group">
+      <label>תיאור</label>
+      <textarea formControlName="description" placeholder="תאר את המשימה..." rows="3"></textarea>
+      <span class="field-icon area-icon">📝</span>
+    </div>
+
+    <div class="row-2">
+      <div class="field-group">
+        <label>מחיר (₪)</label>
+        <input type="number" formControlName="price" placeholder="100" min="100" />
+        <span class="field-icon">💰</span>
+      </div>
+
+      <mat-form-field appearance="outline" dir="rtl" class="date-field">
+        <mat-label>📅 תאריך יעד</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="scheduling" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="status-row">
+      <label class="status-label">סטטוס</label>
+      <div class="field-group status-select-group">
+        <select formControlName="status" [disabled]="!isNew">
+          <option [ngValue]="statusModes[1]">⏳ ממתין</option>
+          <option [ngValue]="statusModes[2]">🔄 בתהליך</option>
+          <option [ngValue]="statusModes[3]">✅ הושלם</option>
+          <option [ngValue]="statusModes[4]">❌ בוטל</option>
+        </select>
+        <span class="select-arrow">▼</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn-cancel" type="button" (click)="cancel()">
+      <span>❌</span> ביטול
+    </button>
+    <button class="btn-save" type="button" [disabled]="taskForm.invalid" (click)="save()">
+      <span>💾</span> {{ isNew ? 'צור משימה' : 'עדכן משימה' }}
+    </button>
   </div>
 </form>

@@ -11,7 +11,7 @@ export class DownloadService {
 
   
   downloadCv() {
-  return this.http.get('/assets/resume.pdf', { responseType: 'blob' });
+  return this.http.get('/assets/myResume.pdf', { responseType: 'blob' });
 }
    
 }

@@ -1,1 +1,13 @@
-<p>status works!</p>
+<div class="status-selector" [class.disabled]="disabled">
+  <button
+    *ngFor="let mode of statusModes"
+    type="button"
+    class="status-btn"
+    [class.selected]="status === mode"
+    [disabled]="!canChangeStatus || disabled"
+    [matTooltip]="statusToString(mode)"
+    (click)="changeStatus(mode)">
+    <mat-icon>{{ mode | icons }}</mat-icon>
+    <span>{{ statusToString(mode) }}</span>
+  </button>
+</div>

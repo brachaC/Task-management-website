@@ -99,7 +99,7 @@ export class UsersComponent implements OnInit  {
   }
   addUser(){
      this.dialogRef = this.dialog.open(UserFormComponent, {
-          width: '520px',
+          width: '580px',
           disableClose: false,
             data: { task: null }
         });

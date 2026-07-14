@@ -11,9 +11,14 @@ export const routes: Routes = [
      
 {
         path: 'main',
+        redirectTo: 'main/about',
+        pathMatch: 'full'
+    },
+    {
+        path: 'main',
         loadComponent: () =>
           import('./main/main.component').then((m) => m.MainComponent),
-         canActivate: [LoggedInGuardsService] ,       
+         canActivate: [LoggedInGuardsService] ,
 children:[
            
             {
@@ -43,6 +48,11 @@ children:[
         loadComponent: () =>
           import('./login/login.component').then((m) => m.LoginComponent)
     },
-   
+    {
+        path: 'register',
+        loadComponent: () =>
+          import('./register/register.component').then((m) => m.RegisterComponent)
+    },
+
   ];
 

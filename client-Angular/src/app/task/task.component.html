@@ -1,10 +1,36 @@
-<div class="divtask" appoverhilight>
-<div class ="task" [innerText] ="task.name"></div>
-<div class ="task" [innerText] ="task.id"></div> 
-<div class ="task" [innerText] ="task.description"></div> 
-<div class ="task" [innerText] ="task.scheduling"></div> 
-<div class ="task" [innerText] ="task.price | currency:'ILS':'symbol':'1.0-2'"></div>
-<div class ="task" [innerText] ="task.status |status"></div>
+<div class="task-card" appoverhilight>
+  <div class="card-header" [ngClass]="statusClass(task.status)">
+    <span class="status-badge">{{ task.status | status }}</span>
+    <mat-icon class="status-icon">{{ task.status | icons }}</mat-icon>
+  </div>
 
-<mat-icon>{{task.status | icons}}</mat-icon>   
+  <div class="card-body">
+    <h3 class="task-name">{{ task.name }}</h3>
+    <p class="task-desc">{{ task.description }}</p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <span class="meta-icon">🆔</span>
+        <span class="meta-label">מזהה</span>
+        <span class="meta-value">#{{ task.taskId }}</span>
+      </div>
+      <div class="meta-item price">
+        <span class="meta-icon">💰</span>
+        <span class="meta-label">מחיר</span>
+        <span class="meta-value">{{ task.price | currency:'ILS':'symbol':'1.0-2' }}</span>
+      </div>
+      <div class="meta-item date">
+        <span class="meta-icon">📅</span>
+        <span class="meta-label">תאריך</span>
+        <span class="meta-value">{{ task.scheduling | dateOnly }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button class="update-btn" (click)="update.emit(task)" matTooltip="עדכן משימה">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <ng-content></ng-content>
+  </div>
 </div>

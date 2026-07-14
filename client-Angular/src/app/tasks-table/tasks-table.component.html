@@ -1,54 +1,37 @@
-<mat-table [dataSource]="tasksList || []" class="mat-table custom-table">
-    <ng-container *ngFor="let column of columns" [matColumnDef]="column">
-        <mat-header-cell *matHeaderCellDef>
-            <span [innerText]="column"></span>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            @if(column==='price'){
-                 <span [innerText]="element[column] | currency :'ILS':'symbol':'1.0-2'"></span>
-            }
-            @else{
-            @if(column === 'update'){
-                        <mat-icon (click)="updateTask(element)" >update</mat-icon>  
-                     }
-                    
-             @else{       
-            @if(column === 'delete'){
-                        <mat-icon  >delete</mat-icon>  
-                     } 
-                           
-            @else{
-            @if(column==='status'){
-                <span [innerText]="element[column] "></span>
-            }
-           @else{
-                <span [innerText]="element[column]"></span>
-           }
-        }}
-        }
-        </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+<mat-table [dataSource]="tasksList || []" class="custom-table">
+  <ng-container *ngFor="let column of columns" [matColumnDef]="column">
+    <mat-header-cell *matHeaderCellDef>
+      <span>{{ column | toColumnName }}</span>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let element">
+      @if(column === 'status'){
+        <span class="status-cell" [class]="statusClass(element[column])">
+          {{ element[column] | status }}
+        </span>
+      }
+      @else if(column === 'price'){
+        <span>{{ element[column] | currency:'ILS':'symbol':'1.0-2' }}</span>
+      }
+      @else if(column === 'scheduling'){
+        <span>{{ element[column] | dateOnly }}</span>
+      }
+      @else if(column === 'update'){
+        <button class="update-btn" (click)="updateTask(element)" matTooltip="עדכן משימה">
+          <mat-icon>edit</mat-icon>
+        </button>
+      }
+      @else if(column === 'delete'){
+        <button class="delete-btn" (click)="confirmDelete(element)" matTooltip="מחק משימה">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      }
+      @else {
+        <span>{{ element[column] }}</span>
+      }
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columns;"></mat-row>
 </mat-table>
-<!-- <table class="table">
-    <tr>
-<th>name</th>        
-<th>id</th>
-<th>description</th>
-<th>price</th>
-<th>scheduling</th>
-<th>status</th> 
-    </tr>
-@for(oneTask of taskslist;track oneTask){
-    <tr>
-   <td [innerText]="oneTask.name"></td>
-   <td [innerText]="oneTask.id"></td>
-   <td [innerText]="oneTask.description"></td>
-   <td [innerText]="oneTask.scheduling"></td>
-   <td [innerText]="oneTask.price "></td>
-   <td [innerText]="oneTask.status"></td>
-   </tr>    
-}    
-    
-</table> -->

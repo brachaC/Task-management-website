@@ -1,48 +1,25 @@
 import { Injectable } from '@angular/core';
-import { CanActivate,
-   ActivatedRouteSnapshot,
-    RouterStateSnapshot,
-     Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class LoggedInGuardsService implements CanActivate{
+@Injectable({ providedIn: 'root' })
+export class LoggedInGuardsService implements CanActivate {
 
-  constructor(private router: Router) { }
-  canActivate(next: ActivatedRouteSnapshot,
-     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-const isLoggedIn = this.checkUserInLocalStorage();
-        if (!isLoggedIn) {
-            this.router.navigate(['/login']);
-            return false;
-        } else {
-            
-         }
-        return isLoggedIn;
+  constructor(private router: Router) {}
 
+  canActivate(): boolean {
+    if (this.hasToken()) return true;
+    this.router.navigate(['/login']);
+    return false;
+  }
+
+  hasToken(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 > Date.now();
+    } catch {
+      return false;
     }
-    checkUserInLocalStorage(): boolean {
-        const userJson = localStorage.getItem('user');
-        if (!userJson) {
-            return false;
-        }
-        try {
-            const user = JSON.parse(userJson);
-
-            
-            if (user && typeof user === 'object' && 'userName' in user && 'password' in user) {
-            
-                if (typeof user.userName === 'string' && typeof user.password === 'string') {
-                    return true;
-                }      
-            }
-        } catch (e) {
-            console.error('Invalid JSON in localStorage for key "user"', e);
-        }
-
-        return false;
-    }
-
+  }
 }

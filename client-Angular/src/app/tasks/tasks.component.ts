@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {Itask}from '../model/task'
-import { TaskViewMode } from '../model/taskViewMode'; 
+import { TaskViewMode } from '../model/taskViewMode';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StatusPipe } from '../pipe/status.pipe';
@@ -11,11 +11,11 @@ import { TasksTableComponent } from '../tasks-table/tasks-table.component';
 import {TasksDashboardComponent  } from '../tasks-dashboard/tasks-dashboard.component';
 import { StatusComponent } from '../status/status.component';
 import { MatDialog,MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { TaskFromComponent } from '../task-from/task-from.component';
 import { map, NEVER, Observable } from 'rxjs';
 import { TasksService } from '../services/http/tasks.service.service';
-import { ConfigurationService } from '../services/configuration.service';
-import { ChatComponent } from '../chat/chat.component';
+
 @Component({
   selector: 'app-tasks',
   imports: [
@@ -27,82 +27,75 @@ import { ChatComponent } from '../chat/chat.component';
     StatusComponent,
     TasksTableComponent,
     TaskFromComponent,
-    TasksDashboardComponent
+    TasksDashboardComponent,
+    MatIconModule
   ],
   standalone: true,
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss'
 })
-export class TasksComponent implements OnInit, AfterViewInit{
+export class TasksComponent implements OnInit{
 
-private configurationService = inject(ConfigurationService);  
-private dialog= inject(MatDialog);
-private dialogRef:MatDialogRef<TaskFromComponent> | null=null;
-tasksService = inject(TasksService);
- viewState:TaskViewMode=TaskViewMode.Dashboard;
- theStateEnum=TaskViewMode;
- theStatusEnum=StatusMode.all;
- tasksList$ :Observable<Itask[]> = NEVER;
- status=StatusMode
- importantMessageDate = '';
- TasksThatEnd : string[] =[];
+	private dialog= inject(MatDialog);
+	private dialogRef:MatDialogRef<TaskFromComponent> | null=null;
+	tasksService = inject(TasksService);
+	 viewState:TaskViewMode=TaskViewMode.Dashboard;
+	 theStateEnum=TaskViewMode;
+	 theStatusEnum=StatusMode;
+	 tasksList$ :Observable<Itask[]> = NEVER;
+	 status=StatusMode
+	selectStatus: StatusMode = StatusMode.all;
 
- @ViewChild(ChatComponent ) myChatRef  : ChatComponent = {} as ChatComponent ;  
- 
- ngOnInit(): void {
-  
-}
-ngAfterViewInit(): void {
-    this.loadTasks();
-    this.configurationService.messageEvent.subscribe(
-      (data: string) => this.showMessage(JSON.parse(data)));
-    this.configurationService.importantEvent.subscribe(
-        (data: string) => this.showImportantMessage(JSON.parse(data)));
-  }
-  showMessage(userMessage: {userName:string, message: string}){
-    const {userName, message} = userMessage
-    this.myChatRef.addMessage(userName ,  `💬 ${ message}`);
-  }
-  showImportantMessage(serverMessage:{name: string, date:string}){
-    if(!this.myChatRef){
-      return;
-    }
-  const {name, date} = serverMessage;
-    if(date !== this.importantMessageDate){
-      this.TasksThatEnd = [];
-      this.importantMessageDate = date;
-    }
-    if(!this.TasksThatEnd.includes(name)){
-      this.TasksThatEnd= [...this.TasksThatEnd, name];
-      this.myChatRef.addMessage('מנהל המשימות',`💥משימה && ${name} && חייבת להסתיים היום!`);
-    }
-  }
-  
-  loadTasks(){
-     this.tasksList$ = this.tasksService.getTasks$().pipe(
-      map(tasks => tasks || []), 
-    );
-  }
- 
+	 ngOnInit(): void {
+	    this.loadTasks();
+	  }
 
-selectStatus=StatusMode.all;
-changeState=()=>{
-  this.viewState=this.viewState===TaskViewMode.Table
-  ?TaskViewMode.Dashboard:TaskViewMode.Table
-}
-addTask(){
-  this.dialogRef = this.dialog.open(TaskFromComponent, {
-      width: '520px',
-      disableClose: false,
-        data: { task: null }
-    });
-    this.dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed', result);
-      this.loadTasks();
-      this.dialogRef = null; // אחרי הסגירה מאפסים את ההפניה
-    });
-}
+	  loadTasks(){
+	     this.tasksList$ = this.tasksService.getTasks$().pipe(
+	      map(tasks => tasks || []),
+	    );
+	  }
+
+	  onStatusChange(value: StatusMode): void {
+	    this.selectStatus = value;
+	  }
+
+	changeState=()=>{
+	  this.viewState=this.viewState===TaskViewMode.Table
+	  ?TaskViewMode.Dashboard:TaskViewMode.Table
+	}
+	addTask(){
+	  this.dialogRef = this.dialog.open(TaskFromComponent, {
+	      width: '580px',
+	      disableClose: false,
+	        data: { task: null }
+	    });
+	    this.dialogRef.afterClosed().subscribe(result => {
+	      console.log('Dialog closed', result);
+	      if (result?.success) {
+	        this.tasksService.addTask$(result.task).subscribe(() => this.loadTasks());
+	      }
+	      this.dialogRef = null;
+	    });
+	}
+
+	onUpdateTask(task: Itask): void {
+	  this.dialogRef = this.dialog.open(TaskFromComponent, {
+	    width: '580px',
+	    disableClose: false,
+	    data: { task }
+	  });
+	  this.dialogRef.afterClosed().subscribe(result => {
+	    console.log('Dialog closed', result);
+	    if (result?.success) {
+	      this.tasksService.updateTask$(result.task).subscribe(() => this.loadTasks());
+	    }
+	    this.dialogRef = null;
+	  });
+	}
+
+	onDeleteTask(task: Itask): void {
+	  this.tasksService.deleteTask$(task.taskId).subscribe(() => this.loadTasks());
+	}
 
 }
-
-  

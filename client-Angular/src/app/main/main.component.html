@@ -1,26 +1,3 @@
-<!-- <header>
-<nav>
-    <ul>
-      <li *ngFor="let button of buttons">
-        <a class="active"
-           [innerText]="button.name"
-           [ngClass]="{'disabled': button.disabled}"
-           routerLink=""
-           routerLinkActive="active"></a>
-      </li>
-    </ul>
-</nav>
-<div class="flex-col"> 
-      <div class="flex-row">
-        <span  *ngIf="isServerAlive === null">בודק מצב שרת...</span>
-        <span  *ngIf="isServerAlive === true" style="color: green;">✅ השרת פעיל</span>
-        <span  *ngIf="isServerAlive === false" style="color: red;">❌ השרת אינו פעיל</span>
-     </div>
-  </div> 
-</header>
-<app-tasks></app-tasks>
-<app-chat></app-chat>
- -->
 <header>
   <nav class="navbar">
     <ul>
@@ -33,16 +10,10 @@
       </li>
     </ul>
   </nav>
-
-  <div class="server-status">
-    <span *ngIf="isServerAlive === null" class="checking">בודק מצב שרת...</span>
-    <span *ngIf="isServerAlive === true" class="online">✅ השרת פעיל</span>
-    <span *ngIf="isServerAlive === false" class="offline">❌ השרת אינו פעיל</span>
-  </div>
 </header>
 
 <div class="flex-col">
-  <app-tasks></app-tasks>
+  <router-outlet></router-outlet>
 </div>
 
-<app-chat></app-chat> <!-- יופיע בפינה הימנית התחתונה -->
+<app-chat></app-chat>

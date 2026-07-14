@@ -1,21 +1,37 @@
-<div class="container" *ngIf="((tasksList$ | async)?? []) | filterStatus:selectStatus as tasksList">
-<header>
-<button  id="button" [innerText]="viewState===theStateEnum.Table?
-'table':'dashboard'" (click)="changeState()"></button>
-<button id="button" (click)="addTask()" [innerText]="'add task'"></button>    
-<select [(ngModel)]="selectStatus" id="select">
-    <option [value]="-1">{{-1 | status}}</option>
-    <option [value]="0">{{0 | status}}</option>
-    <option [value]="1">{{1 | status}}</option>
-    <option [value]="2">{{2| status}}</option>
-    <option [value]="3">{{3 | status}}</option>
-</select>
+<div class="container">
+  @if(((tasksList$ | async) ?? []) | filterStatus:selectStatus; as tasksList){
+    <header>
+      <div class="header-left">
+        <button class="add-btn" (click)="addTask()">
+          <mat-icon>add</mat-icon>
+          משימה חדשה
+        </button>
+        <button class="toggle-btn" (click)="changeState()">
+          <mat-icon>{{ viewState === theStateEnum.Table ? 'dashboard' : 'table_chart' }}</mat-icon>
+          {{ viewState === theStateEnum.Table ? 'תצוגת כרטיסיות' : 'תצוגת טבלה' }}
+        </button>
+      </div>
 
-</header>
+      <div class="header-right">
+        <div class="filter-group">
+          <mat-icon class="filter-icon">filter_alt</mat-icon>
+          <select [ngModel]="selectStatus" (ngModelChange)="onStatusChange($event)">
+            <option [ngValue]="-1">{{ -1 | status }}</option>
+            <option [ngValue]="0">{{ 0 | status }}</option>
+            <option [ngValue]="1">{{ 1 | status }}</option>
+            <option [ngValue]="2">{{ 2 | status }}</option>
+            <option [ngValue]="3">{{ 3 | status }}</option>
+          </select>
+        </div>
+        <span class="task-count">{{ tasksList.length }} משימות</span>
+      </div>
+    </header>
 
-<div *ngIf ="viewState===theStateEnum.Dashboard">
-<app-tasks-dashboard [tasksList]="tasksList | filterStatus:selectStatus"></app-tasks-dashboard>
-</div>
-<div *ngIf ="viewState===theStateEnum.Table">
-<app-tasks-table [tasksList]="tasksList  | filterStatus:selectStatus"></app-tasks-table>
+    <div *ngIf="viewState === theStateEnum.Dashboard">
+      <app-tasks-dashboard [tasksList]="tasksList" (updateTask)="onUpdateTask($event)"></app-tasks-dashboard>
+    </div>
+    <div *ngIf="viewState === theStateEnum.Table">
+      <app-tasks-table [tasksList]="tasksList" (deleteTask)="onDeleteTask($event)"></app-tasks-table>
+    </div>
+  }
 </div>

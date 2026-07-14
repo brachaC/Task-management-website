@@ -1,0 +1,168 @@
+:host {
+  display: block;
+  direction: rtl;
+  max-height: 85vh;
+  overflow-y: auto;
+
+  .user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-header {
+    background: linear-gradient(135deg, #0d6b7d, #0a5564, #07222f);
+    color: #fff;
+    text-align: center;
+    padding: 1.8rem 2rem;
+    border-radius: 0 0 28px 28px;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(25,194,194,0.22) 0%, transparent 55%),
+                  radial-gradient(circle at 80% 20%, rgba(250,12,91,0.08) 0%, transparent 55%);
+    }
+
+    .form-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 0.2rem;
+      position: relative;
+    }
+    h2 {
+      margin: 0 0 0.15rem;
+      font-size: 1.45rem;
+      font-weight: 700;
+      position: relative;
+    }
+    .form-sub {
+      margin: 0;
+      opacity: 0.75;
+      font-size: 0.85rem;
+      position: relative;
+    }
+  }
+
+  .form-body {
+    padding: 1.4rem 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .field-group {
+    position: relative;
+    flex: 1;
+
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+      color: #0d6b7d;
+      font-size: 0.85rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.7rem 0.9rem 0.7rem 2.4rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      background: #f9fafb;
+      color: #1e293b;
+      transition: all 0.25s;
+      box-sizing: border-box;
+      appearance: none;
+
+      &:focus {
+        outline: none;
+        border-color: #19c2c2;
+        box-shadow: 0 0 0 3px rgba(25,194,194,0.12);
+        background: #fff;
+      }
+
+      &.ng-invalid.ng-touched {
+        border-color: #f43f5e;
+        background: #fff5f5;
+      }
+
+      &::placeholder { color: #cbd5e1; }
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 12px center;
+      cursor: pointer;
+    }
+
+    .field-icon {
+      position: absolute;
+      left: 12px;
+      bottom: 11px;
+      font-size: 1.1rem;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    align-items: start;
+
+    .field-group { margin: 0; }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    padding: 1rem 1.5rem 1.2rem;
+    border-top: 1px solid #e8edf2;
+
+    button {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      border-radius: 14px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-cancel {
+      background: #f1f5f9;
+      color: #64748b;
+      &:hover { background: #e2e8f0; transform: translateY(-1px); }
+    }
+
+    .btn-save {
+      background: linear-gradient(135deg, #0d6b7d, #19c2c2);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(13,107,125,0.3);
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(13,107,125,0.4);
+      }
+      &:disabled {
+        background: #cbd5e1;
+        box-shadow: none;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .row-2 { grid-template-columns: 1fr; }
+    .form-actions { flex-direction: column; }
+  }
+}

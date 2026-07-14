@@ -32,6 +32,11 @@
                 "glob": "**/*",
                 "input": "public/assets/",
                 "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "public/config/",
+                "output": "config"
               }
             ],
             "styles": [

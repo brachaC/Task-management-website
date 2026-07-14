@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Itask } from '../model/task';
 import { CommonModule } from '@angular/common';
 import { StatusPipe } from '../pipe/status.pipe';
@@ -14,6 +14,11 @@ import { StatusMode } from '../model/statusMode';
   styleUrl: './tasks-dashboard.component.scss'
 })
 export class TasksDashboardComponent {
-@Input() tasksList: Itask[] | null= [];
-theStatusEnum= StatusMode;
+  @Input() tasksList: Itask[] | null= [];
+  @Output() updateTask = new EventEmitter<Itask>();
+  theStatusEnum= StatusMode;
+
+  onUpdate(task: Itask): void {
+    this.updateTask.emit(task);
+  }
 }

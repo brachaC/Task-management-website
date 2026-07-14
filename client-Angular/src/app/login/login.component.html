@@ -1,41 +1,66 @@
-<div class="allDiv">    
-<h1 >Login</h1>
-<form [formGroup]="formGroup" (ngSubmit)="login()">
-<div id="labelInput">
- <label for ="userName">UserName</label>
- <input
- type ="text" 
- id="userName"
- class=""
- formControlName="userName"
- required
- placeholder="Enter your userName"
- >
- <span class="errorText"
-*ngIf="formGroup.get('username')?.invalid && mouseoverLogin"
-[innerText]="'Mandatory field'">
-                </span>
-</div>
-<div id="labelInput">
-<label for="password">Password</label>
-<input 
-    type="password" 
-    id="password" 
-    class="" 
-    formControlName="password" 
-    required
-    placeholder="Enter your password"/>
+<div class="login-page">
+  <div class="login-container">
+    <!-- Visual Panel -->
+    <div class="visual-panel">
+      <div class="visual-content">
+        <div class="brand-icon">
+          <mat-icon>code_blocks</mat-icon>
+        </div>
+        <h1>ברוכים הבאים</h1>
+        <p>התחברו למערכת לניהול משימות ולצ'אט חכם</p>
+        <div class="visual-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="visual-bg-shape"></div>
+    </div>
 
-<span class="errorText"
-*ngIf="formGroup.get('password')?.invalid && mouseoverLogin"
-[innerText]="'Mandatory field'">
-                </span>
-               </div>
- <div
-(mouseenter)="mouseoverLogin=true"
-(mouseleave)="mouseoverLogin=false">
-<button type="submit" class="login" [disabled]="formGroup.invalid">Login</button>
-</div>         
-</form>
+    <!-- Form Panel -->
+    <div class="form-panel">
+      <div class="form-inner">
+        <h2>התחברות</h2>
+        <p class="form-sub">הזינו את פרטי המשתמש שלכם</p>
 
+        <form [formGroup]="formGroup" (ngSubmit)="login()">
+          <div class="input-group">
+            <mat-icon>person</mat-icon>
+            <input
+              type="text"
+              formControlName="userName"
+              placeholder="שם משתמש"
+              autocomplete="username"
+            />
+          </div>
+
+          <div class="input-group">
+            <mat-icon>lock</mat-icon>
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="סיסמה"
+              autocomplete="current-password"
+            />
+          </div>
+
+          <button type="submit" [disabled]="formGroup.invalid || loading" class="submit-btn">
+            <mat-spinner *ngIf="loading" diameter="22"></mat-spinner>
+            <span *ngIf="!loading">התחבר</span>
+          </button>
+        </form>
+
+        <!-- User not found alert -->
+        <div class="not-found-alert" *ngIf="showNotFoundAlert">
+          <div class="alert-content">
+            <mat-icon>info</mat-icon>
+            <span>משתמש לא קיים במערכת או שהשם או הסיסמה שגויים. לרישום</span>
+          </div>
+          <button class="alert-btn" routerLink="/register">להרשמה</button>
+        </div>
+
+        <p class="register-link">
+          אין לך חשבון? <a routerLink="/register">צור חשבון חדש</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

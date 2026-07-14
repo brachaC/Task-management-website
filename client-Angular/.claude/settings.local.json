@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"h:\\\\פרויקטים ב-github לקורות חיים\\\\tasks\\\\server-Node.js\\\\env\\\\\")",
+      "Read(//h/פרויקטים ב-github לקורות חיים/tasks/server-Node.js/**)"
+    ]
+  }
+}

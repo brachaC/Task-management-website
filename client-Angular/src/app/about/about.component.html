@@ -1,31 +1,44 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>אודות האתר</mat-card-title>
-  </mat-card-header>
+<div class="about-page">
+  <section class="hero-card">
+    <div class="avatar-circle">
+      <span>BH</span>
+    </div>
+    <h1>{{ developerName }}</h1>
+    <p class="hero-title">{{ title }}</p>
+    <div class="hero-clock">
+      <mat-icon class="clock-icon">schedule</mat-icon>
+      <span>{{ currentTime }}</span>
+    </div>
+  </section>
 
-  <mat-card-content>
-    <p>
-      אתר זה נכתב על ידי <strong>{{ developerName }}</strong>.
-    </p>   
-        <ul>
-            <li> fronted: <strong>Node.js</strong></li>
-            <li> backend: <strong>Angular 19</strong></li>
-            <li>  DataBase: <strong>Sql Server</strong></li>
-        </ul> 
-        
-    <p>האתר משתמש בטכנולוגיות הבאות:</p>
-    <ul>
-       @for (tech of technologies; track tech) {
-            <li  [innerText]="tech">
-            </li>
+  <section class="tech-section">
+    <div class="tech-col">
+      <h2><mat-icon>code</mat-icon> Frontend</h2>
+      <div class="chip-list">
+        @for (t of frontendTechs; track t.name) {
+          <span class="chip"><mat-icon>{{ t.icon }}</mat-icon> {{ t.name }}</span>
         }
-    </ul>
-      
+      </div>
+    </div>
+    <div class="tech-col">
+      <h2><mat-icon>dns</mat-icon> Backend</h2>
+      <div class="chip-list">
+        @for (t of backendTechs; track t.name) {
+          <span class="chip"><mat-icon>{{ t.icon }}</mat-icon> {{ t.name }}</span>
+        }
+      </div>
+    </div>
+    <div class="tech-col">
+      <h2><mat-icon>storage</mat-icon> Databases</h2>
+      <div class="chip-list">
+        @for (t of dataTechs; track t.name) {
+          <span class="chip"><mat-icon>{{ t.icon }}</mat-icon> {{ t.name }}</span>
+        }
+      </div>
+    </div>
+  </section>
 
-    <mat-divider></mat-divider>
-
-    <p class="clock">
-      🕒 השעה הנוכחית: <strong>{{ currentTime }}</strong>
-    </p>
-  </mat-card-content>
-</mat-card>
+  <footer class="about-footer">
+    <p>נבנה באהבה ❤️ | {{ developerName }} © 2026</p>
+  </footer>
+</div>

@@ -1,1 +1,77 @@
-<p>register works!</p>
+<div class="login-page">
+  <div class="login-container">
+    <!-- Visual Panel -->
+    <div class="visual-panel">
+      <div class="visual-content">
+        <div class="brand-icon">
+          <mat-icon>person_add</mat-icon>
+        </div>
+        <h1>הצטרפו אלינו</h1>
+        <p>צרו חשבון חדש והתחילו לנהל משימות בקלות</p>
+        <div class="visual-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="visual-bg-shape"></div>
+    </div>
+
+    <!-- Form Panel -->
+    <div class="form-panel">
+      <div class="form-inner">
+        <h2>הרשמה</h2>
+        <p class="form-sub">מלאו את הפרטים ליצירת חשבון</p>
+
+        <form [formGroup]="formGroup" (ngSubmit)="register()">
+          <div class="input-group">
+            <mat-icon>person</mat-icon>
+            <input
+              type="text"
+              formControlName="userName"
+              placeholder="שם משתמש"
+              autocomplete="username"
+            />
+          </div>
+
+          <div class="input-group">
+            <mat-icon>lock</mat-icon>
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="סיסמה"
+              autocomplete="new-password"
+            />
+          </div>
+
+          <div class="input-group">
+            <mat-icon>email</mat-icon>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="אימייל"
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="input-group optional">
+            <mat-icon>phone</mat-icon>
+            <input
+              type="tel"
+              formControlName="phone"
+              placeholder="טלפון (לא חובה)"
+              autocomplete="tel"
+            />
+          </div>
+
+          <button type="submit" [disabled]="formGroup.invalid || loading" class="submit-btn">
+            <mat-spinner *ngIf="loading" diameter="22"></mat-spinner>
+            <span *ngIf="!loading">צור חשבון</span>
+          </button>
+        </form>
+
+        <p class="register-link">
+          כבר יש לך חשבון? <a routerLink="/login">התחבר</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
