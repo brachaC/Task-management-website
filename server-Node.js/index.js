@@ -5,9 +5,15 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 const { getConfig } =  require('./services/configService');
+const webSocketService = require('./services/webSocketService');
 const {log, levels} =  require('./utils/logUtils');
 const checkConnectionService =   require('./services/checkConnectionService');
 const tasksService =   require('./services/tasksService');
+const usersService =   require('./services/usersService');
+const authenticationService =   require('./services/authenticationService');
+const messagesService =   require('./services/massagesService');
+const {startCheckDates} = require('./utils/massagesUtils');
+
 app.use(
    bodyParser.urlencoded ({
       extended:true,
@@ -19,6 +25,9 @@ app.use(bodyParser.text());
 app.use(cors());
 app.use('/checkConnection',checkConnectionService);
 app.use('/tasks',tasksService);
+app.use('/users', usersService);
+app.use('/auth', authenticationService);
+app.use('/messages', messagesService);
 
 app.use((req,res,next) => {
     const error = new Error("not found")
@@ -45,7 +54,11 @@ res.status(error.statusCode || 500).send ({
       app.listen(config.APP_PORT, function () {
              log(`app listening on port ${config.APP_PORT }!`, levels.ALTER);
       });
-      
+   webSocketService.initWebSocket({
+         port: config.WEB_SOCKET_PORT,
+      });
+      startCheckDates();
+  
    }
 
 )

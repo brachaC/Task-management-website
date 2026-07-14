@@ -24,7 +24,7 @@ async function runStoredProcedure(spName, params){
         const poolConfig = getSqlConfig();
         const pool = await sql.connect(poolConfig);
         const request = pool.request();
-      
+
         if(params){
         // מוסיפים את הפרמטרים דינמית
           Object.keys(params).forEach(key => {
@@ -36,6 +36,7 @@ async function runStoredProcedure(spName, params){
   }
   catch(err){
      log(err, levels.ERROR);
+     throw err;
   }
 }
 
