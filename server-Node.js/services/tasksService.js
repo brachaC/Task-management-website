@@ -25,9 +25,10 @@ router.get('/gettasks',   function (req,res,next){
 })
 router.post('/addtask',   function (req,res,next){
     const task = req.body;
+    log(`POST /addtask body: ${JSON.stringify(req.body)}`, levels.INFORMATION);
     task.taskId = 0;
     try {
-      addOrUpdateTask(task).then( (result =>{ 
+      addOrUpdateTask(task).then( (result =>{
             res.send(result);
         }));
     }
@@ -37,8 +38,9 @@ router.post('/addtask',   function (req,res,next){
   })
  router.put('/updatetask',   function (req,res,next){
     const task = req.body;
+    log(`PUT /updatetask body: ${JSON.stringify(req.body)}`, levels.INFORMATION);
     try {
-        addOrUpdateTask(task).then( (result =>{ 
+        addOrUpdateTask(task).then( (result =>{
             res.send(result);
         }));
     }
