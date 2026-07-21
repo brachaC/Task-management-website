@@ -56,3 +56,14 @@ html { scroll-behavior: smooth; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── Global Responsive ── */
+img, video, canvas, svg { max-width: 100%; height: auto; }
+
+/* prefers-reduced-motion is handled per-component where relevant */
+
+@media (max-width: 480px) {
+  .cdk-overlay-pane {
+    max-width: 95vw !important;
+  }
+}

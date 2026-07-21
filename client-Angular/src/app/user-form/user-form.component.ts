@@ -32,11 +32,11 @@ export class UserFormComponent implements OnInit{
   ngOnInit(): void {
    
     this.userForm = this.fb.group({
-      userName: ['', [Validators.required, Validators.min(8)]],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9-]+$/)  ]],
+      userName: ['', [Validators.required, Validators.minLength(3)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9-]+$/)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required,Validators.max(10)],
-      roleId: new FormControl(RoleEnum.standard) 
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      roleId: new FormControl(RoleEnum.standard)
     });
      
   }

@@ -1,4 +1,4 @@
-<mat-table [dataSource]="tasksList || []" class="custom-table">
+<mat-table [dataSource]="tasksList || []" class="custom-table desktop-table">
   <ng-container *ngFor="let column of columns" [matColumnDef]="column">
     <mat-header-cell *matHeaderCellDef>
       <span>{{ column | toColumnName }}</span>
@@ -35,3 +35,22 @@
   <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: columns;"></mat-row>
 </mat-table>
+
+<!-- Mobile card view -->
+<div class="mobile-cards">
+  @for (t of tasksList; track t.taskId) {
+    <div class="task-card">
+      <div class="card-top">
+        <span class="card-name">{{ t.name }}</span>
+        <span class="status-cell" [class]="statusClass(t.status)">{{ t.status | status }}</span>
+      </div>
+      <div class="card-row"><span class="card-label">תאריך</span><span>{{ t.scheduling | dateOnly }}</span></div>
+      <div class="card-row"><span class="card-label">מחיר</span><span>{{ t.price | currency:'ILS':'symbol':'1.0-2' }}</span></div>
+      <div class="card-row"><span class="card-label">תיאור</span><span class="card-desc">{{ t.description }}</span></div>
+      <div class="card-actions">
+        <button class="update-btn" (click)="updateTask(t)"><mat-icon>edit</mat-icon>עדכן</button>
+        <button class="delete-btn" (click)="confirmDelete(t)"><mat-icon>delete_outline</mat-icon>מחק</button>
+      </div>
+    </div>
+  }
+</div>

@@ -12,6 +12,20 @@
       &:nth-child(#{$i}) { animation-delay: #{$i * 0.04}s; }
     }
   }
+
+  @media (max-width: 600px) {
+    .rect {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .rect {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
 }
 
 @keyframes fadeUp {

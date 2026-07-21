@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  direction: rtl;
+  padding: 1rem;
+
+  h2[mat-dialog-title] {
+    margin: 0 0 1rem;
+    color: var(--primary, #0d6b7d);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  mat-dialog-content {
+    p {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--text, #1e293b);
+    }
+  }
+
+  mat-dialog-actions {
+    gap: 0.5rem;
+    justify-content: flex-end;
+    padding-top: 1rem;
+
+    button {
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+
+    h2[mat-dialog-title] {
+      font-size: 1.15rem;
+    }
+
+    mat-dialog-content p {
+      font-size: 0.9rem;
+    }
+
+    mat-dialog-actions {
+      flex-direction: column;
+      justify-content: stretch;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

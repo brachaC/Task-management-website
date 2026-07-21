@@ -73,12 +73,14 @@
     background: var(--surface, #fff);
     border-radius: var(--radius, 14px);
     box-shadow: var(--shadow);
-    overflow: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .users-table {
     width: 100%;
-    table-layout: fixed;
+    min-width: 650px;
+    table-layout: auto;
   }
 
   mat-header-cell {
@@ -87,19 +89,21 @@
     font-weight: 700;
     font-size: 0.85rem;
     text-align: center;
-    padding: 12px 6px;
+    padding: 12px 10px;
     border-bottom: 2px solid var(--primary, #0d6b7d);
-    white-space: normal;
-    word-break: break-word;
+    white-space: nowrap;
   }
 
   mat-cell {
-    padding: 10px 6px;
+    padding: 10px;
     font-size: 0.85rem;
     color: var(--text, #1e293b);
     text-align: center;
     border-bottom: 1px solid #f1f5f9;
-    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
   }
 
   mat-row {
@@ -154,8 +158,72 @@
     }
   }
 
-  @media (max-width: 640px) {
+  /* ── Mobile cards ── */
+  .mobile-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .user-card {
+    background: var(--surface, #fff);
+    border-radius: var(--radius, 14px);
     padding: 1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px solid #e8edf2;
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .card-user-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary, #0d6b7d);
+    }
+
+    .card-row {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text, #1e293b);
+    }
+
+    .card-label {
+      color: var(--neutral, #64748b);
+      font-weight: 500;
+      min-width: 60px;
+      flex-shrink: 0;
+    }
+
+    .card-delete {
+      margin-top: 0.3rem;
+      align-self: flex-start;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      gap: 0.3rem;
+    }
+  }
+
+  /* Responsive visibility */
+  .desktop-only { display: block; }
+  .mobile-only  { display: none; }
+
+  @media (max-width: 768px) {
+    .desktop-only { display: none !important; }
+    .mobile-only  { display: flex !important; }
+  }
+
+  @media (max-width: 640px) {
+    padding: 0.75rem;
 
     .users-header {
       flex-direction: column;
@@ -164,6 +232,14 @@
       padding: 1rem;
 
       .header-left { justify-content: center; }
+    }
+
+    .user-card {
+      padding: 0.8rem;
+      gap: 0.4rem;
+
+      .card-user-name { font-size: 0.95rem; }
+      .card-row { font-size: 0.8rem; }
     }
   }
 }

@@ -32,7 +32,7 @@ export class TasksTableComponent implements OnInit, OnChanges {
   private dialogRef: MatDialogRef<TaskFromComponent> | null = null;
   columns: string[] = [];
   @Input() tasksList: Itask[] | null = [];
-  @Output() afterUpdate: EventEmitter<any> = new EventEmitter();
+  @Output() updateTaskEmit: EventEmitter<Itask> = new EventEmitter();
   @Output() deleteTask: EventEmitter<Itask> = new EventEmitter();
   notDisplayColumns = ['taskId'];
 
@@ -65,7 +65,9 @@ export class TasksTableComponent implements OnInit, OnChanges {
       width: '580px', disableClose: false, data: { task }
     });
     this.dialogRef.afterClosed().subscribe(result => {
-      this.afterUpdate.emit();
+      if (result?.success) {
+        this.updateTaskEmit.emit(result.task);
+      }
       this.dialogRef = null;
     });
   }

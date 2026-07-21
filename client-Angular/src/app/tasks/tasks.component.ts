@@ -65,8 +65,10 @@ export class TasksComponent implements OnInit{
 	  ?TaskViewMode.Dashboard:TaskViewMode.Table
 	}
 	addTask(){
+	  const m = window.innerWidth < 640;
 	  this.dialogRef = this.dialog.open(TaskFromComponent, {
-	      width: '580px',
+	      width: m ? '95vw' : '580px',
+	      maxWidth: '95vw',
 	      disableClose: false,
 	        data: { task: null }
 	    });
@@ -80,8 +82,10 @@ export class TasksComponent implements OnInit{
 	}
 
 	onUpdateTask(task: Itask): void {
+	  const m = window.innerWidth < 640;
 	  this.dialogRef = this.dialog.open(TaskFromComponent, {
-	    width: '580px',
+	    width: m ? '95vw' : '580px',
+	    maxWidth: '95vw',
 	    disableClose: false,
 	    data: { task }
 	  });

@@ -20,18 +20,14 @@ export class AboutComponent implements OnInit, OnDestroy {
 
   frontendTechs = [
     { name: 'Angular 19', icon: 'code' },
-    { name: 'React', icon: 'code' },
     { name: 'RxJS', icon: 'sync' },
     { name: 'NGRX', icon: 'layers' },
   ];
   backendTechs = [
     { name: 'Node.js', icon: 'dns' },
-    { name: 'Python', icon: 'terminal' },
-    { name: 'C#', icon: 'settings' },
   ];
   dataTechs = [
     { name: 'SQL Server', icon: 'storage' },
-    { name: 'MongoDB', icon: 'cloud' },
   ];
 
   currentTime = '';

@@ -75,7 +75,8 @@ export class UsersComponent implements OnInit  {
     }
 
     this.confirmRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '220px',
+      width: window.innerWidth < 480 ? '90vw' : '220px',
+      maxWidth: '90vw',
       disableClose: false,
         data: { message: 'האם אתה בטוח שאתה רוצה למחוק את המשתמש?'}
     });
@@ -99,7 +100,8 @@ export class UsersComponent implements OnInit  {
   }
   addUser(){
      this.dialogRef = this.dialog.open(UserFormComponent, {
-          width: '580px',
+          width: window.innerWidth < 640 ? '95vw' : '580px',
+          maxWidth: '95vw',
           disableClose: false,
             data: { task: null }
         });

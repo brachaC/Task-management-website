@@ -7,9 +7,12 @@
 
   <div class="form-body">
     <div class="field-group">
-      <label>שם משתמש</label>
+      <label>שם משתמש *</label>
       <input formControlName="userName" placeholder="הכנס שם משתמש..." />
       <span class="field-icon">👤</span>
+      @if (userForm.get('userName')?.touched && userForm.get('userName')?.errors) {
+        <span class="err">@if (userForm.get('userName')?.errors?.['required']) {שם משתמש חובה} @else if (userForm.get('userName')?.errors?.['minlength']) {לפחות 3 תווים}</span>
+      }
     </div>
 
     <div class="row-2">
@@ -19,17 +22,23 @@
         <span class="field-icon">📞</span>
       </div>
       <div class="field-group">
-        <label>אימייל</label>
+        <label>אימייל *</label>
         <input formControlName="email" placeholder="user@example.com" />
         <span class="field-icon">📧</span>
+        @if (userForm.get('email')?.touched && userForm.get('email')?.errors) {
+          <span class="err">@if (userForm.get('email')?.errors?.['required']) {אימייל חובה} @else if (userForm.get('email')?.errors?.['email']) {אימייל לא תקין}</span>
+        }
       </div>
     </div>
 
     <div class="row-2">
       <div class="field-group">
-        <label>סיסמה</label>
+        <label>סיסמה *</label>
         <input type="password" formControlName="password" placeholder="••••••••" />
         <span class="field-icon">🔒</span>
+        @if (userForm.get('password')?.touched && userForm.get('password')?.errors) {
+          <span class="err">@if (userForm.get('password')?.errors?.['required']) {סיסמה חובה} @else if (userForm.get('password')?.errors?.['minlength']) {לפחות 4 תווים}</span>
+        }
       </div>
       <div class="field-group">
         <label>תפקיד</label>

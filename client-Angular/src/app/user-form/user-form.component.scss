@@ -109,6 +109,14 @@
       opacity: 0.4;
       pointer-events: none;
     }
+
+    .err {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+      color: #f43f5e;
+      font-weight: 500;
+    }
   }
 
   .row-2 {

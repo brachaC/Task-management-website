@@ -31,7 +31,7 @@
       <app-tasks-dashboard [tasksList]="tasksList" (updateTask)="onUpdateTask($event)"></app-tasks-dashboard>
     </div>
     <div *ngIf="viewState === theStateEnum.Table">
-      <app-tasks-table [tasksList]="tasksList" (deleteTask)="onDeleteTask($event)"></app-tasks-table>
+      <app-tasks-table [tasksList]="tasksList" (deleteTask)="onDeleteTask($event)" (updateTaskEmit)="onUpdateTask($event)"></app-tasks-table>
     </div>
   }
 </div>

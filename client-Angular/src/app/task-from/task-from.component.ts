@@ -43,16 +43,15 @@ taskForm: FormGroup = {} as FormGroup;
 
   ){}
   ngOnInit(): void {
-    if (this.data?.task) {
-      this.task = this.data.task;
-      this.isNew = false;
-    }
+    const t = this.data?.task;
+    if (t) { this.task = t; this.isNew = false; }
+    const fallback = t ? (t.status ?? StatusMode.pending) : StatusMode.pending;
     this.taskForm = this.fb.group({
-      name: [this.task.name || '', Validators.required],
-      description: [this.task.description || '', Validators.required],
-      price: [this.task.price || 100, [Validators.required, Validators.min(100)]],
-      scheduling: [this.task.scheduling ? new Date(this.task.scheduling) : null, this.dateFromTodayValidator],
-      status:  [this.task.status ?? StatusMode.pending],
+      name: [this.task?.name || '', Validators.required],
+      description: [this.task?.description || '', Validators.required],
+      price: [this.task?.price || 100, [Validators.required, Validators.min(100)]],
+      scheduling: [this.task?.scheduling ? new Date(this.task.scheduling) : null, this.dateFromTodayValidator],
+      status:  [Number(fallback)],
     });
 }
 dateFromTodayValidator(): ValidatorFn {

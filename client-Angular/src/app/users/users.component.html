@@ -10,7 +10,8 @@
     </button>
   </header>
 
-  <div class="table-wrapper">
+  <!-- Desktop table -->
+  <div class="table-wrapper desktop-only">
     <mat-table [dataSource]="usersList || []" class="users-table">
       <ng-container *ngFor="let column of columns" [matColumnDef]="column">
         <mat-header-cell *matHeaderCellDef class="col-{{column}}">
@@ -40,5 +41,43 @@
       <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: columns;"></mat-row>
     </mat-table>
+  </div>
+
+  <!-- Mobile cards -->
+  <div class="mobile-cards mobile-only">
+    @for (u of usersList; track u.userId) {
+      <div class="user-card">
+        <div class="card-top">
+          <span class="card-user-name">{{ u.userName }}</span>
+          <span class="role-badge" [class.manager]="u.roleId === theRole.manager">
+            {{ u.roleId ?? 1 | roleText }}
+          </span>
+        </div>
+        @if (u.firstName || u.lastName) {
+          <div class="card-row">
+            <span class="card-label">שם:</span>
+            <span>{{ u.firstName }} {{ u.lastName }}</span>
+          </div>
+        }
+        @if (u.email) {
+          <div class="card-row">
+            <span class="card-label">אימייל:</span>
+            <span>{{ u.email }}</span>
+          </div>
+        }
+        @if (user.roleId === theRole.manager && u.password && !notDisplayColumns.includes('password')) {
+          <div class="card-row">
+            <span class="card-label">סיסמה:</span>
+            <span>{{ u.password }}</span>
+          </div>
+        }
+        <button class="delete-btn card-delete"
+                [disabled]="user.roleId !== theRole.manager"
+                (click)="deleteUser(u)">
+          <mat-icon>delete_outline</mat-icon>
+          מחק
+        </button>
+      </div>
+    }
   </div>
 </div>

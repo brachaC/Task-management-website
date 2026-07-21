@@ -1,11 +1,17 @@
-<header>
+<header class="main-header">
   <nav class="navbar">
-    <ul>
+    <!-- Hamburger button (mobile) -->
+    <button class="hamburger" (click)="toggleMenu()" aria-label="תפריט">
+      <mat-icon>{{ menuOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+
+    <ul [class.open]="menuOpen">
       <li *ngFor="let button of buttons">
         <a [innerText]="button.name"
            [routerLink]="button.link"
            routerLinkActive="active"
-           [routerLinkActiveOptions]="{ exact: false }">
+           [routerLinkActiveOptions]="{ exact: false }"
+           (click)="closeMenu()">
         </a>
       </li>
     </ul>

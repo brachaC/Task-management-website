@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  direction: rtl;
+  padding: 1rem;
+
+  .header {
+    background: linear-gradient(135deg, #0d6b7d, #0a5564);
+    color: #fff;
+    padding: 1.2rem 1.5rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .greeting {
+    margin: 0 0 0.8rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .info-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .one-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    padding: 0.5rem;
+
+    .header {
+      padding: 1rem;
+      border-radius: 12px;
+    }
+
+    .greeting { font-size: 1.3rem; }
+
+    .one-row {
+      font-size: 0.85rem;
+    }
+  }
+}

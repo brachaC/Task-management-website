@@ -1,10 +1,25 @@
-
 <div class="home-page">
+  <!-- Floating tech bubbles -->
+  <div class="floating-tech" aria-hidden="true">
+    <span class="bubble" style="--x:10%;--d:14s;--s:1.1">Angular</span>
+    <span class="bubble" style="--x:70%;--d:18s;--s:0.9">React</span>
+    <span class="bubble" style="--x:30%;--d:16s;--s:1.0">TypeScript</span>
+    <span class="bubble" style="--x:85%;--d:20s;--s:0.85">JavaScript</span>
+    <span class="bubble" style="--x:50%;--d:13s;--s:1.15">Node.js</span>
+    <span class="bubble" style="--x:15%;--d:22s;--s:0.8">Python</span>
+    <span class="bubble" style="--x:92%;--d:17s;--s:1.0">C#</span>
+    <span class="bubble" style="--x:60%;--d:19s;--s:0.95">SQL</span>
+    <span class="bubble" style="--x:40%;--d:15s;--s:1.05">MongoDB</span>
+    <span class="bubble" style="--x:78%;--d:21s;--s:0.9">Java</span>
+    <span class="bubble" style="--x:5%;--d:23s;--s:0.85">C++</span>
+    <span class="bubble" style="--x:45%;--d:12s;--s:1.0">C</span>
+  </div>
+
   <section class="hero">
     <div class="hero-text">
       <p class="greeting">שלום, <strong>{{ name }}</strong></p>
       <h1>הנדסאית תוכנה</h1>
-      <p class="subtitle">Angular, React, Python, Node.js, C#, C++ ,C ,Java, SQL, MongoDB.</p>
+      <p class="subtitle">Angular, React, TypeScript, Node.js, Python, C#, SQL, MongoDB, Java, C++, C</p>
 
       <div class="hero-buttons">
         <button class="primary" (click)="goToResume()">🗒️ קורות חיים</button>
@@ -14,5 +29,4 @@
       <p class="contact-phone" *ngIf="phone">{{ phone }}</p>
     </div>
   </section>
-
 </div>
